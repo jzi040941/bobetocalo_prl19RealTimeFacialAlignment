@@ -3,6 +3,11 @@ RealTimeFacialAlignment using bobetocalo_prl19 model
 
 #### Requisites
 - faces_framework https://github.com/bobetocalo/faces_framework
+- Download model file
+Download ModelFile from https://github.com/bobetocalo/bobetocalo_prl19
+and place it under data/
+- tensorflow
+You have to build libtensorflow_cc.so with bazel
 
 #### Installation
 This repository must be located inside the following directory:
