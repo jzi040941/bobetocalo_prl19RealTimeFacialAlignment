@@ -23,6 +23,7 @@ set(face_alignment_bobetocalo_prl19_src
   ${faces_framework_src}
   ${CMAKE_CURRENT_LIST_DIR}/src/FaceAlignmentPrl19.cpp
   ${CMAKE_CURRENT_LIST_DIR}/src/FaceDetectorOpencv.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/src/FaceHeadPoseOpencv.cpp
 )
 
 set(face_alignment_bobetocalo_prl19_test

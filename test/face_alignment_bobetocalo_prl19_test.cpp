@@ -19,6 +19,7 @@
 #include <FaceAnnotation.hpp>
 #include <FaceAlignmentPrl19.hpp>
 #include <FaceDetectorOpencv.hpp>
+#include <FaceHeadPoseOpencv.hpp>
 #include <utils.hpp>
 
 // -----------------------------------------------------------------------------
@@ -100,10 +101,11 @@ main
   boost::shared_ptr<upm::FaceComposite> composite(new upm::FaceComposite());
   boost::shared_ptr<upm::FaceDetector> facessddetection(new upm::FaceDetectorOpencv("data/"));
   boost::shared_ptr<upm::FaceAlignment> fa(new upm::FaceAlignmentPrl19("data/"));
+  boost::shared_ptr<upm::FaceHeadPose> faceheadpose(new upm::FaceHeadPoseOpencv("data/"));
   
   composite->addComponent(facessddetection);
   composite->addComponent(fa);
-
+  composite->addComponent(faceheadpose);
   /// Parse face component options
   composite->parseOptions(argc, argv);
   composite->load();
@@ -112,7 +114,8 @@ main
   boost::shared_ptr<upm::Viewer> viewer(new upm::Viewer);
   viewer->init(0, 0, "face_alignment_bobetocalo_prl19_test");
 
-
+  
+  cv::Mat img_orig;
   cv::Mat frame;
   //int camera_device = parser.get<int>("camera");
   int camera_device = 0;
@@ -125,12 +128,14 @@ main
     }
 
   while(true){ 
-    v >> frame;
-    if (frame.empty()) {
+    v >> img_orig;
+    if (img_orig.empty()) {
       std::cerr << "Cannot read video" << std::endl;
         return EXIT_FAILURE;
     }
-
+  
+  
+  resize(img_orig, frame, Size(700, 700 * (float) img_orig.rows / (float) img_orig.cols), 0, 0, INTER_LINEAR_EXACT);
   //detect face
   
 

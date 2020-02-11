@@ -91,7 +91,7 @@ FaceAlignmentPrl19::load()
  
  
   auto options = tensorflow::SessionOptions();
-  options.config.mutable_gpu_options()->set_per_process_gpu_memory_fraction(0.7);
+  options.config.mutable_gpu_options()->set_per_process_gpu_memory_fraction(0.5);
   options.config.mutable_gpu_options()->set_allow_growth(true);
   _session.reset(tensorflow::NewSession(options));
   tensorflow::Status session_create_status = _session->Create(graph);

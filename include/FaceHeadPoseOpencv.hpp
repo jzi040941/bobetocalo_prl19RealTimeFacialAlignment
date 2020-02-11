@@ -61,6 +61,31 @@ public:
     );
   
 private:
+  std::vector<int> landmarksIDsFor3DPoints {45, 36, 30, 48, 54};
+  std::vector<Point3f> objectPoints {
+        {8.27412, 1.33849, 10.63490},    //left eye corner
+        {-8.27412, 1.33849, 10.63490},   //right eye corner
+        {0, -4.47894, 17.73010},         //nose tip
+        {-4.61960, -10.14360, 12.27940}, //right mouth corner
+        {4.61960, -10.14360, 12.27940},  //left mouth corner
+  };
+  std::vector<Point3f> objectPointsForReprojection {
+          objectPoints[2],                   // nose
+          objectPoints[2] + Point3f(0,0,15), // nose and Z-axis
+          objectPoints[2] + Point3f(0,15,0), // nose and Y-axis
+          objectPoints[2] + Point3f(15,0,0)  // nose and X-axis
+  };
+
+  std::vector<Point2f> projectionOutput;
+
+  float scaleFactor;
+
+  float w;
+  float h;
+  cv::Mat rvec = Mat::zeros(3, 1, CV_64FC1);
+  cv::Mat tvec = Mat::zeros(3, 1, CV_64FC1);
+
+
   std::string _path;
 
 };
